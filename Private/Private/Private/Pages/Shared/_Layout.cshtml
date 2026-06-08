@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] – Kandy Sports Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --blue: #0078FF;
+            --blue-bright: #3399FF;
+            --black: #0A0A0A;
+            --black-2: #111111;
+            --black-3: #1A1A1A;
+            --white: #F5F5F5;
+            --grey: #888888;
+            --border: #2A2A2A;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(10,10,10,0.95);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            padding: 0 2rem; height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+            color: var(--white); text-decoration: none; letter-spacing: 2px;
+        }
+        .nav-logo span { color: var(--blue); }
+        .nav-links {
+            display: flex; gap: 2rem; list-style: none; align-items: center;
+        }
+        .nav-links a {
+            color: var(--grey); text-decoration: none; font-weight: 600;
+            font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+
+        /* USER INFO */
+        .nav-user {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .nav-user-info {
+            display: flex; flex-direction: column; align-items: flex-end;
+            text-decoration: none; cursor: pointer;
+        }
+        .nav-user-name {
+            font-size: 0.9rem; font-weight: 700; color: var(--white);
+            letter-spacing: 1px; text-transform: uppercase; line-height: 1;
+        }
+        .nav-user-role {
+            font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--blue); margin-top: 2px;
+        }
+        .nav-logout {
+            color: var(--grey); font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+            border: 1px solid var(--border); padding: 5px 14px; border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .nav-logout:hover { border-color: var(--blue); color: var(--blue); }
+
+        /* MAIN */
+        main { padding-top: 70px; }
+
+        /* FOOTER */
+        footer {
+            background: var(--black-2); border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem; text-align: center;
+            color: var(--grey); font-size: 0.9rem;
+        }
+        footer a { color: var(--blue); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* UTILITIES */
+        .btn {
+            display: inline-block; padding: 0.75rem 2rem; border-radius: 4px;
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem;
+            letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+            cursor: pointer; border: none; transition: all 0.2s;
+        }
+        .btn-primary { background: var(--blue); color: #fff; }
+        .btn-primary:hover { background: var(--blue-bright); }
+        .btn-outline { background: transparent; color: var(--white); border: 2px solid var(--blue); }
+        .btn-outline:hover { background: var(--blue); }
+
+        .section { padding: 5rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem;
+            letter-spacing: 3px; margin-bottom: 0.5rem;
+        }
+        .section-title span { color: var(--blue); }
+        .section-subtitle { color: var(--grey); margin-bottom: 3rem; font-size: 1.05rem; }
+    </style>
+</head>
+<body>
+
+@{
+    var sessionName = Context.Session.GetString("kmc_user_name");
+    var sessionRole = Context.Session.GetString("kmc_user_role");
+    var isLoggedIn  = !string.IsNullOrEmpty(sessionName);
+}
+
+<nav>
+    <div class="nav-inner">
+        <a class="nav-logo" asp-page="/Index">KANDY <span>SPORTS</span> CLUB</a>
+        <ul class="nav-links">
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a asp-page="/About">About</a></li>
+            <li><a asp-page="/Events">Events</a></li>
+            <li><a asp-page="/Contact">Contact</a></li>
+
+            @if (isLoggedIn)
+            {
+                <li>
+                    <div class="nav-user">
+                        @if (sessionRole == "organiser")
+                        {
+                            <a asp-page="/Dashboard" class="nav-user-info">
+                                <span class="nav-user-name">@sessionName</span>
+                                <span class="nav-user-role">@sessionRole</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="nav-user-info" style="cursor:default;">
+                                <span class="nav-user-name">@sessionName</span>
+                                <span class="nav-user-role">@sessionRole</span>
+                            </div>
+                        }
+                        <a asp-page="/Logout" class="nav-logout">Logout</a>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li><a asp-page="/Login" style="color:var(--blue);">Login</a></li>
+                <li><a asp-page="/Register" style="color:var(--blue);">Register</a></li>
+            }
+        </ul>
+    </div>
+</nav>
+
+<main>
+    @RenderBody()
+</main>
+
+<footer>
+    <p>&copy; @DateTime.Now.Year Kandy Sports Club. All rights reserved. |
+        <a asp-page="/Contact">Contact Us</a>
+    </p>
+</footer>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

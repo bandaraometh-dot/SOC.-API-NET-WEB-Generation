@@ -1,0 +1,345 @@
+﻿@page
+@model Private.Pages.EventsModel
+@{
+    ViewData["Title"] = "Events";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    var isLoggedIn = HttpContext.Session.GetString("kmc_user_role") == "citizen";
+    var userId     = HttpContext.Session.GetString("kmc_user_id");
+}
+
+<style>
+    .page-hero {
+        background: linear-gradient(135deg, #0A0A0A, #001a3a);
+        padding: 5rem 2rem 4rem; text-align: center;
+        border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+        content: ''; position: absolute; inset: 0;
+        background:
+            repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(0,120,255,0.03) 80px, rgba(0,120,255,0.03) 81px),
+            repeating-linear-gradient(0deg,  transparent, transparent 80px, rgba(0,120,255,0.03) 80px, rgba(0,120,255,0.03) 81px);
+        pointer-events: none;
+    }
+    .page-hero h1 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        letter-spacing: 4px; position: relative;
+    }
+    .page-hero h1 span { color: var(--blue); }
+    .page-hero p { color: var(--grey); font-size: 1.1rem; margin-top: 1rem; position: relative; }
+
+    /* ── FILTER BAR ── */
+    .filter-section {
+        background: var(--black-2); border-bottom: 1px solid var(--border);
+        padding: 20px 40px; display: flex; gap: 16px;
+        flex-wrap: wrap; align-items: flex-end;
+    }
+    .filter-group { flex: 1; min-width: 180px; }
+    .filter-label {
+        display: block; font-size: 10px; font-weight: 700;
+        letter-spacing: 3px; text-transform: uppercase;
+        color: var(--grey); margin-bottom: 8px;
+    }
+    .filter-input, .filter-select {
+        width: 100%; background: var(--black);
+        border: 1px solid var(--border); color: var(--white);
+        padding: 10px 14px; font-family: 'Rajdhani', sans-serif;
+        font-size: 14px; outline: none; transition: border-color 0.2s;
+        border-radius: 4px;
+    }
+    .filter-input:focus, .filter-select:focus { border-color: var(--blue); }
+    .filter-select option { background: var(--black-2); }
+    .btn-filter {
+        background: var(--blue); border: none; color: white;
+        padding: 10px 28px; font-family: 'Rajdhani', sans-serif;
+        font-weight: 700; font-size: 13px; letter-spacing: 2px;
+        text-transform: uppercase; cursor: pointer; border-radius: 4px;
+        transition: background 0.2s; height: 40px; align-self: flex-end;
+    }
+    .btn-filter:hover { background: var(--blue-bright); }
+    .btn-clear {
+        background: transparent; border: 1px solid var(--border); color: var(--grey);
+        padding: 10px 20px; font-family: 'Rajdhani', sans-serif;
+        font-weight: 700; font-size: 13px; letter-spacing: 2px;
+        text-transform: uppercase; cursor: pointer; height: 40px; border-radius: 4px;
+        text-decoration: none; display: flex; align-items: center;
+        align-self: flex-end; transition: all 0.2s;
+    }
+    .btn-clear:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ── RESULTS INFO ── */
+    .results-info {
+        font-size: 13px; color: #666; margin-bottom: 24px; letter-spacing: 1px;
+    }
+    .results-info span { color: var(--blue); font-weight: 700; }
+
+    /* ── EVENTS LIST ── */
+    .events-list { display: grid; gap: 1.5rem; }
+
+    .event-item {
+        background: var(--black-2); border: 1px solid var(--border);
+        border-radius: 8px; padding: 28px 32px;
+        display: grid; grid-template-columns: 72px 1fr auto;
+        gap: 28px; align-items: center;
+        transition: border-color 0.2s, background 0.2s;
+        position: relative; overflow: hidden;
+    }
+    .event-item:hover { border-color: var(--blue); background: var(--black-3); }
+
+    /* Date Badge */
+    .event-badge {
+        background: var(--blue); color: white; text-align: center;
+        padding: 10px 8px; border-radius: 6px; flex-shrink: 0;
+    }
+    .event-badge .day {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2.2rem; line-height: 1; letter-spacing: 1px;
+    }
+    .event-badge .month {
+        font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 2px; text-transform: uppercase; opacity: 0.9;
+    }
+
+    /* Details */
+    .event-details h3 {
+        font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+        letter-spacing: 2px; color: var(--white);
+        margin-bottom: 8px; line-height: 1;
+    }
+    .event-meta-row {
+        display: flex; flex-wrap: wrap; gap: 16px;
+        font-size: 13px; color: var(--grey); margin-bottom: 8px;
+    }
+    .event-meta-row span { display: flex; align-items: center; gap: 6px; }
+    .meta-dot {
+        width: 6px; height: 6px; background: var(--blue);
+        border-radius: 50%; flex-shrink: 0;
+    }
+    .event-desc-short {
+        font-size: 13px; color: #555; line-height: 1.6;
+        display: -webkit-box; -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    /* Right Side */
+    .event-right {
+        display: flex; flex-direction: column;
+        align-items: flex-end; gap: 12px; flex-shrink: 0;
+    }
+    .event-tag {
+        background: rgba(0,120,255,0.1); color: var(--blue);
+        border: 1px solid rgba(0,120,255,0.3);
+        padding: 4px 14px; font-size: 10px; font-weight: 700;
+        letter-spacing: 2px; text-transform: uppercase;
+        white-space: nowrap; border-radius: 20px;
+    }
+    .event-status-badge {
+        font-size: 10px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; padding: 3px 10px;
+        border: 1px solid; border-radius: 4px; white-space: nowrap;
+    }
+    .status-active   { color: #44CC44; border-color: #44CC44; }
+    .status-inactive { color: #888;    border-color: #888; }
+    .status-full     { color: #FF4444; border-color: #FF4444; }
+
+    .capacity-wrap { text-align: right; }
+    .capacity-text { font-size: 11px; color: #666; letter-spacing: 1px; margin-bottom: 5px; }
+    .capacity-text span { color: var(--blue); font-weight: 700; }
+    .capacity-bar { width: 120px; height: 3px; background: var(--border); border-radius: 2px; position: relative; }
+    .capacity-fill {
+        position: absolute; top: 0; left: 0; height: 100%;
+        background: var(--blue); border-radius: 2px;
+    }
+
+    .btn-register {
+        background: var(--blue); border: none; color: white;
+        padding: 8px 20px; font-family: 'Rajdhani', sans-serif;
+        font-weight: 700; font-size: 11px; letter-spacing: 2px;
+        text-transform: uppercase; cursor: pointer; white-space: nowrap;
+        border-radius: 4px; transition: background 0.2s;
+    }
+    .btn-register:hover    { background: var(--blue-bright); }
+    .btn-register:disabled { background: #333; color: #555; cursor: not-allowed; }
+    .btn-login-prompt {
+        font-size: 11px; color: #555; letter-spacing: 1px;
+        text-decoration: none; white-space: nowrap;
+    }
+    .btn-login-prompt:hover { color: var(--blue); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+        text-align: center; padding: 80px 20px;
+        background: var(--black-2); border: 1px solid var(--border); border-radius: 8px;
+    }
+    .empty-icon {
+        font-family: 'Bebas Neue', sans-serif; font-size: 72px;
+        color: var(--black-3); letter-spacing: 4px;
+    }
+    .empty-text { font-size: 14px; color: #555; margin-top: 8px; }
+
+    /* ── ERROR ── */
+    .error-box {
+        background: rgba(255,60,60,0.08); border-left: 3px solid #FF4444;
+        padding: 14px 18px; font-size: 14px; color: #FF8888;
+        margin-bottom: 24px; border-radius: 4px;
+    }
+
+    @@media (max-width: 768px) {
+        .filter-section { padding: 16px 20px; flex-direction: column; }
+        .event-item { grid-template-columns: 64px 1fr; gap: 16px; }
+        .event-right { display: none; }
+    }
+</style>
+
+<!-- HERO -->
+<div class="page-hero">
+    <h1>UPCOMING <span>EVENTS</span></h1>
+    <p>Stay up to date with everything happening at Kandy Sports Club</p>
+</div>
+
+<!-- FILTER BAR -->
+<form method="get" class="filter-section">
+    <div class="filter-group" style="flex:2; min-width:220px;">
+        <label class="filter-label">Search Events</label>
+        <input type="text" name="Search" class="filter-input"
+               placeholder="Search by title, location..."
+               value="@Model.Search" />
+    </div>
+    <div class="filter-group">
+        <label class="filter-label">Event Type</label>
+        <select name="FilterType" class="filter-select">
+            <option value="">All Types</option>
+            @foreach (var t in Model.EventTypes)
+            {
+                <option value="@t" selected="@(Model.FilterType == t ? "selected" : null)">@t</option>
+            }
+        </select>
+    </div>
+    <div class="filter-group">
+        <label class="filter-label">Date</label>
+        <input type="date" name="FilterDate" class="filter-input"
+               value="@Model.FilterDate" />
+    </div>
+    <button type="submit" class="btn-filter">Filter</button>
+    <a href="/Events" class="btn-clear">Clear</a>
+</form>
+
+<!-- EVENTS LIST -->
+<section class="section">
+    <div class="container">
+
+        @if (!string.IsNullOrEmpty(Model.Error))
+        {
+            <div class="error-box">@Model.Error</div>
+        }
+
+        <div class="results-info">
+            Showing <span>@Model.Events.Count</span> event@(Model.Events.Count != 1 ? "s" : "")
+            @if (!string.IsNullOrEmpty(Model.Search) || !string.IsNullOrEmpty(Model.FilterType) || !string.IsNullOrEmpty(Model.FilterDate))
+            {
+                <span> — filtered results</span>
+            }
+        </div>
+
+        @if (Model.Events.Count == 0)
+        {
+            <div class="empty-state">
+                <div class="empty-icon">NO EVENTS</div>
+                <div class="empty-text">No events found matching your criteria.</div>
+            </div>
+        }
+        else
+        {
+            <div class="events-list">
+                @foreach (var ev in Model.Events)
+                {
+                    var pct       = ev.MaxParticipants > 0 ? (int)((double)ev.CurrentParticipants / ev.MaxParticipants * 100) : 0;
+                    var isFull    = ev.CurrentParticipants >= ev.MaxParticipants;
+                    var statusCls = isFull ? "status-full" : ev.Status?.ToLower() == "active" ? "status-active" : "status-inactive";
+                    var statusLbl = isFull ? "FULL" : ev.Status?.ToUpper();
+
+                    <div class="event-item">
+
+                        <!-- Date Badge -->
+                        <div class="event-badge">
+                            <div class="day">@ev.StartDate.ToString("dd")</div>
+                            <div class="month">@ev.StartDate.ToString("MMM")</div>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="event-details">
+                            <h3>@ev.Title</h3>
+                            <div class="event-meta-row">
+                                <span><span class="meta-dot"></span>@ev.Location</span>
+                                <span><span class="meta-dot"></span>@ev.StartDate.ToString("h:mm tt") — @ev.EndDate.ToString("MMM dd, yyyy")</span>
+                                <span><span class="meta-dot"></span>By @ev.OrganiserName</span>
+                            </div>
+                            <div class="event-desc-short">@ev.Description</div>
+                        </div>
+
+                        <!-- Right -->
+                        <div class="event-right">
+                            <span class="event-tag">@ev.EventType</span>
+                            <span class="event-status-badge @statusCls">@statusLbl</span>
+                            <div class="capacity-wrap">
+                                <div class="capacity-text">
+                                    <span>@ev.CurrentParticipants</span> / @ev.MaxParticipants spots
+                                </div>
+                                <div class="capacity-bar">
+                                    <div class="capacity-fill" style="width:@pct%"></div>
+                                </div>
+                            </div>
+                            @if (isLoggedIn)
+                            {
+                                <button class="btn-register"
+                                        onclick="registerEvent(@ev.Id, @userId)"
+                                        @(isFull ? "disabled" : "")>
+                                    @(isFull ? "FULL" : "REGISTER")
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="/Login" class="btn-login-prompt">Login to register →</a>
+                            }
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<div id="toast" style="display:none; position:fixed; bottom:32px; right:32px;
+    background:var(--black-2); border:1px solid var(--border); border-left:3px solid var(--blue);
+    padding:14px 20px; font-size:13px; color:var(--white); z-index:9999; border-radius:4px;"></div>
+
+<script>
+    const API_BASE = "https://localhost:7108/api";
+
+    function showToast(msg, success) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.style.borderLeftColor = success ? "#44CC44" : "#FF4444";
+        t.style.display = "block";
+        setTimeout(() => { t.style.display = "none"; }, 3000);
+    }
+
+    async function registerEvent(eventId, citizenId) {
+        try {
+            const res = await fetch(`${API_BASE}/Register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ eventId, citizenId: parseInt(citizenId) })
+            });
+            if (res.status === 201 || res.ok)
+                showToast("Successfully registered for event!", true);
+            else if (res.status === 409)
+                showToast("You are already registered. Please choose another event.", false);
+            else
+                showToast("Registration failed. Please try again.", false);
+        } catch {
+            showToast("Could not connect to server.", false);
+        }
+    }
+</script>

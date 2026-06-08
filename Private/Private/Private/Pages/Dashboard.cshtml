@@ -1,0 +1,498 @@
+﻿@page
+@model Private.Pages.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<style>
+    .dash-wrap { padding: 40px; max-width: 1300px; margin: 0 auto; }
+
+    /* ── HEADER ── */
+    .dash-header {
+        display: flex; justify-content: space-between; align-items: flex-end;
+        margin-bottom: 40px; padding-bottom: 24px;
+        border-bottom: 1px solid var(--border); position: relative;
+    }
+    .dash-header::after {
+        content: ''; position: absolute; bottom: -1px; left: 0;
+        width: 80px; height: 2px; background: var(--blue);
+    }
+    .dash-label {
+        font-size: 11px; font-weight: 700; letter-spacing: 4px;
+        text-transform: uppercase; color: var(--blue); margin-bottom: 8px;
+    }
+    .dash-title {
+        font-family: 'Bebas Neue', sans-serif; font-size: 52px;
+        letter-spacing: 4px; line-height: 1; color: var(--white);
+    }
+    .dash-title span { color: var(--blue); }
+    .btn-add {
+        background: var(--blue); border: none; color: white;
+        padding: 12px 28px; font-family: 'Rajdhani', sans-serif;
+        font-weight: 700; font-size: 13px; letter-spacing: 2px;
+        text-transform: uppercase; cursor: pointer; border-radius: 4px;
+        transition: background 0.2s;
+    }
+    .btn-add:hover { background: var(--blue-bright); }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        gap: 1px; background: var(--border); margin-bottom: 32px;
+        border-radius: 8px; overflow: hidden;
+    }
+    .stat-box {
+        background: var(--black-2); padding: 24px 28px;
+        display: flex; flex-direction: column; gap: 4px;
+        transition: background 0.2s;
+    }
+    .stat-box:hover { background: var(--black-3); }
+    .stat-box-num {
+        font-family: 'Bebas Neue', sans-serif; font-size: 42px;
+        color: var(--blue); line-height: 1; letter-spacing: 2px;
+    }
+    .stat-box-label {
+        font-size: 10px; font-weight: 700; letter-spacing: 3px;
+        text-transform: uppercase; color: #666;
+    }
+
+    /* ── ALERTS ── */
+    .alert-success {
+        background: rgba(0,180,0,0.08); border-left: 3px solid #00AA00;
+        padding: 12px 16px; font-size: 13px; color: #66DD66;
+        margin-bottom: 24px; border-radius: 4px;
+    }
+    .alert-error {
+        background: rgba(255,60,60,0.08); border-left: 3px solid #FF4444;
+        padding: 12px 16px; font-size: 13px; color: #FF8888;
+        margin-bottom: 24px; border-radius: 4px;
+    }
+
+    /* ── TABLE ── */
+    .table-wrap {
+        background: var(--black-2); border: 1px solid var(--border);
+        border-radius: 8px; overflow-x: auto;
+    }
+    .table-header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .table-title {
+        font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+        letter-spacing: 3px; color: var(--white);
+    }
+    .event-count {
+        font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #666;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { border-bottom: 1px solid var(--border); }
+    th {
+        padding: 12px 16px; text-align: left; font-size: 10px;
+        font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #666;
+    }
+    tbody tr { border-bottom: 1px solid #1A1A1A; transition: background 0.2s; }
+    tbody tr:hover { background: var(--black-3); }
+    tbody tr:last-child { border-bottom: none; }
+    td { padding: 14px 16px; font-size: 14px; color: #CCC; }
+    .td-title { font-weight: 600; color: var(--white); }
+    .td-type {
+        font-size: 10px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; color: var(--blue);
+    }
+
+    .status-badge {
+        font-size: 10px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; padding: 3px 10px;
+        border: 1px solid; border-radius: 4px; white-space: nowrap;
+    }
+    .status-active   { color: #44CC44; border-color: #44CC44; }
+    .status-inactive { color: #888;    border-color: #888; }
+    .status-full     { color: #FF4444; border-color: #FF4444; }
+
+    .capacity-mini { font-size: 12px; color: #888; }
+    .capacity-mini span { color: var(--blue); font-weight: 700; }
+
+    .action-btns { display: flex; gap: 8px; }
+    .btn-edit {
+        background: transparent; border: 1px solid var(--border); color: #888;
+        padding: 5px 14px; font-family: 'Rajdhani', sans-serif;
+        font-size: 11px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; cursor: pointer; border-radius: 4px;
+        transition: all 0.2s;
+    }
+    .btn-edit:hover { border-color: var(--blue); color: var(--blue); }
+    .btn-delete {
+        background: transparent; border: 1px solid var(--border); color: #888;
+        padding: 5px 14px; font-family: 'Rajdhani', sans-serif;
+        font-size: 11px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; cursor: pointer; border-radius: 4px;
+        transition: all 0.2s;
+    }
+    .btn-delete:hover { border-color: #FF4444; color: #FF4444; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.85); z-index: 2000;
+        align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+        background: var(--black-2); border: 1px solid var(--border);
+        width: 100%; max-width: 560px; max-height: 90vh;
+        overflow-y: auto; position: relative; border-radius: 8px;
+    }
+    .modal::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0;
+        height: 3px; background: linear-gradient(90deg, #0078FF, #3399FF, #0078FF);
+        border-radius: 8px 8px 0 0;
+    }
+    .modal-header {
+        padding: 28px 32px 20px; border-bottom: 1px solid var(--border);
+        display: flex; justify-content: space-between; align-items: center;
+    }
+    .modal-title {
+        font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+        letter-spacing: 3px; color: var(--white);
+    }
+    .modal-close {
+        background: none; border: none; color: #666; font-size: 20px;
+        cursor: pointer; padding: 4px 8px; transition: color 0.2s; border-radius: 4px;
+    }
+    .modal-close:hover { color: var(--blue); }
+    .modal-body { padding: 28px 32px 32px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label {
+        display: block; font-size: 10px; font-weight: 700;
+        letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 8px;
+    }
+    .form-input, .form-select, .form-textarea {
+        width: 100%; background: var(--black); border: 1px solid var(--border);
+        color: var(--white); padding: 10px 14px; border-radius: 4px;
+        font-family: 'Rajdhani', sans-serif; font-size: 14px;
+        outline: none; transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus,
+    .form-textarea:focus { border-color: var(--blue); }
+    .form-select option { background: var(--black-2); }
+    .form-textarea { min-height: 80px; resize: vertical; }
+
+    .btn-submit {
+        width: 100%; background: var(--blue); border: none; color: white;
+        padding: 13px; font-family: 'Rajdhani', sans-serif;
+        font-weight: 700; font-size: 14px; letter-spacing: 3px;
+        text-transform: uppercase; cursor: pointer; border-radius: 4px;
+        transition: background 0.2s; margin-top: 8px;
+    }
+    .btn-submit:hover { background: var(--blue-bright); }
+
+    .empty-row td {
+        text-align: center; padding: 48px; color: #444;
+        font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    @@media (max-width: 768px) {
+        .dash-wrap { padding: 20px; }
+        .stats-row { grid-template-columns: 1fr 1fr; }
+        .dash-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+        .form-row { grid-template-columns: 1fr; }
+    }
+</style>
+
+<div class="dash-wrap">
+
+    <!-- Header -->
+    <div class="dash-header">
+        <div>
+            <div class="dash-label">Kandy Sports Club</div>
+            <div class="dash-title">MY <span>DASHBOARD</span></div>
+            <div style="font-size:13px; color:#666; margin-top:6px; letter-spacing:1px;">
+                Welcome back, <span style="color:var(--white); font-weight:700;">@Model.OrganiserName</span>
+            </div>
+        </div>
+        <button class="btn-add" onclick="openCreate()">+ Add New Event</button>
+    </div>
+
+    <!-- Stats Row -->
+    @{
+        var total    = Model.Events.Count;
+        var active   = Model.Events.Count(e => e.Status?.ToLower() == "active");
+        var full     = Model.Events.Count(e => e.CurrentParticipants >= e.MaxParticipants);
+        var totalReg = Model.Events.Sum(e => e.CurrentParticipants);
+    }
+    <div class="stats-row">
+        <div class="stat-box">
+            <div class="stat-box-num">@total</div>
+            <div class="stat-box-label">Total Events</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-box-num">@active</div>
+            <div class="stat-box-label">Active Events</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-box-num">@full</div>
+            <div class="stat-box-label">Fully Booked</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-box-num">@totalReg</div>
+            <div class="stat-box-label">Total Registrations</div>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Success))
+    {
+        <div class="alert-success">@Model.Success</div>
+    }
+    @if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alert-error">@Model.Error</div>
+    }
+
+    <!-- Events Table -->
+    <div class="table-wrap">
+        <div class="table-header">
+            <div class="table-title">MY EVENTS</div>
+            <div class="event-count">@total event@(total != 1 ? "s" : "")</div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Events.Any())
+                {
+                    <tr class="empty-row">
+                        <td colspan="7">No events yet — click "Add New Event" to get started</td>
+                    </tr>
+                }
+                @foreach (var ev in Model.Events)
+                {
+                    var isFull      = ev.CurrentParticipants >= ev.MaxParticipants;
+                    var statusClass = isFull ? "status-full" : ev.Status?.ToLower() == "active" ? "status-active" : "status-inactive";
+                    var statusLabel = isFull ? "FULL" : ev.Status?.ToUpper();
+
+                    <tr>
+                        <td class="td-title">@ev.Title</td>
+                        <td class="td-type">@ev.EventType</td>
+                        <td>@ev.StartDate.ToString("MMM dd, yyyy")</td>
+                        <td>@ev.Location</td>
+                        <td class="capacity-mini">
+                            <span>@ev.CurrentParticipants</span> / @ev.MaxParticipants
+                        </td>
+                        <td>
+                            <span class="status-badge @statusClass">@statusLabel</span>
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-edit" onclick="openEdit(
+                                    @ev.Id,
+                                    '@Html.Raw(ev.Title?.Replace("'","\\\'"))',
+                                    '@Html.Raw(ev.Description?.Replace("'","\\\'"))',
+                                    '@ev.StartDate.ToString("yyyy-MM-dd")',
+                                    '@ev.EndDate.ToString("yyyy-MM-dd")',
+                                    '@ev.EventType',
+                                    '@Html.Raw(ev.Location?.Replace("'","\\\'"))',
+                                    @ev.MaxParticipants,
+                                    '@ev.Status'
+                                )">Edit</button>
+                                <form method="post" asp-page-handler="Delete"
+                                      onsubmit="return confirm('Delete this event?')">
+                                    <input type="hidden" name="id" value="@ev.Id" />
+                                    <button type="submit" class="btn-delete">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ── CREATE MODAL ── -->
+<div class="modal-overlay" id="create-modal">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title">ADD NEW EVENT</div>
+            <button class="modal-close" onclick="closeModal('create-modal')">✕</button>
+        </div>
+        <div class="modal-body">
+            <form method="post" asp-page-handler="Create">
+                <div class="form-group">
+                    <label class="form-label">Event Title</label>
+                    <input type="text" name="title" class="form-input"
+                           placeholder="e.g. Annual Cricket Match" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-textarea"
+                              placeholder="Describe your event..." required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" name="startDate" class="form-input" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date</label>
+                        <input type="date" name="endDate" class="form-input" required />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Event Type</label>
+                        <select name="eventType" class="form-select" required>
+                            <option value="">Select type</option>
+                            <option value="Cricket">Cricket</option>
+                            <option value="Football">Football</option>
+                            <option value="Basketball">Basketball</option>
+                            <option value="Swimming">Swimming</option>
+                            <option value="Athletics">Athletics</option>
+                            <option value="Rugby">Rugby</option>
+                            <option value="Tennis">Tennis</option>
+                            <option value="Chess">Chess</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select name="status" class="form-select" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" name="location" class="form-input"
+                               placeholder="e.g. Main Grounds, Kandy" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Max Participants</label>
+                        <input type="number" name="maxParticipants" class="form-input"
+                               placeholder="100" min="1" required />
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">Create Event</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ── EDIT MODAL ── -->
+<div class="modal-overlay" id="edit-modal">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title">EDIT EVENT</div>
+            <button class="modal-close" onclick="closeModal('edit-modal')">✕</button>
+        </div>
+        <div class="modal-body">
+            <form method="post" asp-page-handler="Edit">
+                <input type="hidden" name="id" id="edit-id" />
+                <div class="form-group">
+                    <label class="form-label">Event Title</label>
+                    <input type="text" name="title" id="edit-title" class="form-input" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" id="edit-description"
+                              class="form-textarea" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" name="startDate" id="edit-startDate"
+                               class="form-input" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date</label>
+                        <input type="date" name="endDate" id="edit-endDate"
+                               class="form-input" required />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Event Type</label>
+                        <select name="eventType" id="edit-eventType" class="form-select" required>
+                            <option value="Cricket">Cricket</option>
+                            <option value="Football">Football</option>
+                            <option value="Basketball">Basketball</option>
+                            <option value="Swimming">Swimming</option>
+                            <option value="Athletics">Athletics</option>
+                            <option value="Rugby">Rugby</option>
+                            <option value="Tennis">Tennis</option>
+                            <option value="Chess">Chess</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="edit-status" class="form-select" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" name="location" id="edit-location"
+                               class="form-input" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Max Participants</label>
+                        <input type="number" name="maxParticipants" id="edit-maxParticipants"
+                               class="form-input" min="1" required />
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openCreate() {
+        document.getElementById("create-modal").classList.add("open");
+    }
+
+    function openEdit(id, title, desc, startDate, endDate, eventType, location, maxP, status) {
+        document.getElementById("edit-id").value              = id;
+        document.getElementById("edit-title").value           = title;
+        document.getElementById("edit-description").value     = desc;
+        document.getElementById("edit-startDate").value       = startDate;
+        document.getElementById("edit-endDate").value         = endDate;
+        document.getElementById("edit-location").value        = location;
+        document.getElementById("edit-maxParticipants").value = maxP;
+
+        const typeSelect = document.getElementById("edit-eventType");
+        for (let o of typeSelect.options) o.selected = o.value === eventType;
+
+        const statusSelect = document.getElementById("edit-status");
+        for (let o of statusSelect.options) o.selected = o.value === status;
+
+        document.getElementById("edit-modal").classList.add("open");
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove("open");
+    }
+
+    document.querySelectorAll(".modal-overlay").forEach(el => {
+        el.addEventListener("click", e => {
+            if (e.target === el) el.classList.remove("open");
+        });
+    });
+</script>

@@ -1,0 +1,311 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\SOC\\Private\\Private\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\events.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\events.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\events.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\events.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\dashboard.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\dashboard.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\about.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\about.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\contact.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\contact.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|e:\\soc\\private\\private\\private\\pages\\contact.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72C5ECAF-C6E8-C643-233F-1666CB54DA37}|Private\\Private.csproj|solutionrelative:private\\pages\\contact.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Logout.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Logout.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\Logout.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Logout.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\Logout.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T08:27:31.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Dashboard.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Dashboard.cshtml",
+              "RelativeToolTip": "Private\\Pages\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGIBAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-10T08:23:32.744Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\Login.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Login.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\Login.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T00:38:48.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Login.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Login.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Login.cshtml",
+              "RelativeToolTip": "Private\\Pages\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-10T00:38:28.097Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\Register.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Register.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\Register.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T00:05:55.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Events.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Events.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Events.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Events.cshtml*",
+              "RelativeToolTip": "Private\\Pages\\Events.cshtml*",
+              "ViewState": "AgIAANoAAAAAAAAAAAAiwOcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-08T16:37:47.763Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Events.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Events.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\Events.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Events.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\Events.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T17:31:25.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Dashboard.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Dashboard.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\Dashboard.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Dashboard.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\Dashboard.cshtml.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAkwEMAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T08:23:37.582Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Logout.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Logout.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Logout.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Logout.cshtml",
+              "RelativeToolTip": "Private\\Pages\\Logout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-10T08:27:26.073Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Register.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Register.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Register.cshtml",
+              "RelativeToolTip": "Private\\Pages\\Register.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-10T00:05:45.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\Index.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T17:13:02.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Index.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Index.cshtml",
+              "RelativeToolTip": "Private\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAswKcAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-08T17:12:38.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Private\\Pages\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAuwBsAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-08T17:11:10.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Contact.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Contact.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\Contact.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Contact.cshtml",
+              "RelativeToolTip": "Private\\Pages\\Contact.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-08T16:38:39.448Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "About.cshtml",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\About.cshtml",
+              "RelativeDocumentMoniker": "Private\\Pages\\About.cshtml",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\About.cshtml",
+              "RelativeToolTip": "Private\\Pages\\About.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAswBsAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-08T16:38:08.625Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Program.cs",
+              "RelativeDocumentMoniker": "Private\\Program.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Program.cs",
+              "RelativeToolTip": "Private\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T18:25:06.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "About.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\About.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\About.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\About.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\About.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T17:31:12.828Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Contact.cshtml.cs",
+              "DocumentMoniker": "E:\\SOC\\Private\\Private\\Private\\Pages\\Contact.cshtml.cs",
+              "RelativeDocumentMoniker": "Private\\Pages\\Contact.cshtml.cs",
+              "ToolTip": "E:\\SOC\\Private\\Private\\Private\\Pages\\Contact.cshtml.cs",
+              "RelativeToolTip": "Private\\Pages\\Contact.cshtml.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA3wC8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T17:31:43.402Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Kandy Sports Club</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --blue: #0078FF;
+            --blue-bright: #3399FF;
+            --black: #0A0A0A;
+            --black-2: #111111;
+            --black-3: #1A1A1A;
+            --white: #F5F5F5;
+            --grey: #888888;
+            --border: #2A2A2A;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--blue); }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .nav-logo-icon {
+            width: 38px; height: 38px;
+            background: var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            color: white;
+            letter-spacing: 1px;
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
+        }
+        .nav-logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+            color: var(--white);
+        }
+        .nav-logo-text span { color: var(--blue); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--grey);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 16px; right: 16px;
+            height: 2px;
+            background: var(--blue);
+            transform: scaleX(0);
+            transition: transform 0.2s;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--white); }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { transform: scaleX(1); }
+
+        .nav-cta {
+            background: var(--blue);
+            color: white !important;
+            padding: 8px 20px !important;
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+        .nav-cta:hover { background: var(--blue-bright) !important; }
+        .nav-cta::after { display: none !important; }
+
+        .nav-kmc-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid #CC0000;
+            color: #CC0000 !important;
+            padding: 6px 14px !important;
+            font-size: 11px !important;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .nav-kmc-link:hover { background: rgba(204,0,0,0.1) !important; }
+        .nav-kmc-link::after { display: none !important; }
+        .nav-kmc-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #CC0000;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-decoration: none;
+        }
+        .nav-user-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+        .nav-user-role {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-top: 2px;
+        }
+        .nav-logout {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--grey);
+            padding: 6px 16px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .nav-logout:hover { border-color: var(--blue); color: var(--blue); }
+
+        main {
+            margin-top: 70px;
+            flex: 1;
+        }
+
+        /* ===== PAGE HEADER (for inner pages) ===== */
+        .page-header {
+            background: var(--black-2);
+            border-bottom: 1px solid var(--border);
+            padding: 80px 80px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 120px;
+            height: 3px;
+            background: var(--blue);
+        }
+        .page-header-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            letter-spacing: 4px;
+            line-height: 1;
+            color: var(--white);
+        }
+        .page-header-title span { color: var(--blue); }
+        .page-header-sub {
+            color: var(--grey);
+            font-size: 16px;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--black-2);
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            padding: 60px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .footer-brand-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 4px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        .footer-brand-sub {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--blue);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .footer-desc {
+            color: var(--grey);
+            font-size: 14px;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+        .footer-heading {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-links a {
+            color: var(--grey);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--white); }
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--grey);
+        }
+        .footer-bottom a {
+            color: #CC0000;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .footer-bottom a:hover { color: #FF1A1A; }
+        .footer-kmc-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+        .footer-kmc-badge span {
+            color: #CC0000;
+            font-weight: 700;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @@media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 40px 24px; }
+            .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; text-align: center; }
+            .page-header { padding: 60px 24px 40px; }
+            .page-header-title { font-size: 48px; }
+        }
+    </style>
+</head>
+<body>
+    @{ 
+        var sessionName = Context.Session?.GetString("ksc_user_name"); 
+        var sessionRole = Context.Session?.GetString("ksc_user_role");
+        var isLoggedIn = !string.IsNullOrEmpty(sessionName);
+        var currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? "";
+    }
+
+    <nav>
+        <a href="/KSC" class="nav-logo">
+            <div class="nav-logo-icon">KSC</div>
+            <span class="nav-logo-text">KANDY <span>SPORTS</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/KSC" class="@(currentPage == "/KSC/Index" || currentPage == "/KSC" ? "active" : "")">Home</a></li>
+            <li><a href="/KSC/Events" class="@(currentPage == "/KSC/Events" ? "active" : "")">Events</a></li>
+            <li><a href="/KSC/About" class="@(currentPage == "/KSC/About" ? "active" : "")">About</a></li>
+            <li><a href="/KSC/Contact" class="@(currentPage == "/KSC/Contact" ? "active" : "")">Contact</a></li>
+            <li>
+                <a href="http://localhost:7136" target="_blank" class="nav-kmc-link">
+                    <span class="nav-kmc-dot"></span>
+                    KMC PLATFORM
+                </a>
+            </li>
+            @if (isLoggedIn)
+            {
+                <li>
+                    <div class="nav-user">
+                        <a href="/KSC/Dashboard" class="nav-user-info">
+                            <span class="nav-user-name">@sessionName</span>
+                            <span class="nav-user-role">@(sessionRole?.ToUpper())</span>
+                        </a>
+                        <a href="/KSC/Logout" class="nav-logout">Logout</a>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li><a href="/KSC/Register" class="nav-cta">JOIN NOW</a></li>
+            }
+        </ul>
+    </nav>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand-name">KANDY SPORTS CLUB</div>
+                <div class="footer-brand-sub">Est. 1998 · Kandy, Sri Lanka</div>
+                <p class="footer-desc">
+                    Kandy's premier sports hub connecting athletes, teams and the community.
+                    Our events are proudly synced with the KMC city platform.
+                </p>
+            </div>
+            <div>
+                <div class="footer-heading">Navigation</div>
+                <ul class="footer-links">
+                    <li><a href="/KSC">Home</a></li>
+                    <li><a href="/KSC/Events">Events</a></li>
+                    <li><a href="/KSC/About">About</a></li>
+                    <li><a href="/KSC/Contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-heading">Contact</div>
+                <ul class="footer-links">
+                    <li><a href="#">Kandy, Sri Lanka</a></li>
+                    <li><a href="mailto:info@kandysports.lk">info@kandysports.lk</a></li>
+                    <li><a href="tel:+94812333333">+94 81 233 3333</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© @DateTime.Now.Year Kandy Sports Club · All Rights Reserved</span>
+            <div class="footer-kmc-badge">
+                SYNCED WITH <span>KMC</span> · <a href="http://localhost:7136" target="_blank">VIEW PLATFORM →</a>
+            </div>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

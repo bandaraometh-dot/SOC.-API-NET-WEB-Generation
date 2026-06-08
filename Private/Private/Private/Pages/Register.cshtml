@@ -1,0 +1,230 @@
+﻿@page
+@model Private.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<style>
+    .auth-wrap {
+        min-height: calc(100vh - 70px);
+        display: flex; align-items: center; justify-content: center;
+        padding: 40px 20px; position: relative; overflow: hidden;
+    }
+    .auth-wrap::before {
+        content: ''; position: absolute; inset: 0;
+        background:
+            radial-gradient(ellipse 50% 80% at 90% 50%, rgba(0,120,255,0.07) 0%, transparent 60%),
+            repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px),
+            repeating-linear-gradient(0deg,  transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px);
+        pointer-events: none;
+    }
+
+    .auth-card {
+        background: var(--black-2); border: 1px solid var(--border);
+        width: 100%; max-width: 540px; position: relative;
+        border-radius: 8px; overflow: hidden;
+    }
+    .auth-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0;
+        height: 3px; background: linear-gradient(90deg, #0078FF, #3399FF, #0078FF);
+    }
+
+    .auth-header {
+        padding: 36px 40px 28px; border-bottom: 1px solid var(--border);
+    }
+    .auth-club {
+        font-family: 'Bebas Neue', sans-serif; font-size: 12px;
+        letter-spacing: 4px; color: var(--blue); margin-bottom: 8px;
+    }
+    .auth-title {
+        font-family: 'Bebas Neue', sans-serif; font-size: 42px;
+        letter-spacing: 4px; line-height: 1; color: var(--white);
+    }
+    .auth-subtitle { font-size: 13px; color: var(--grey); margin-top: 6px; }
+
+    .auth-body { padding: 32px 40px 40px; }
+
+    /* Role Toggle */
+    .role-toggle {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 1px; background: var(--border); margin-bottom: 28px;
+        border-radius: 4px; overflow: hidden;
+    }
+    .role-btn {
+        background: var(--black-3); border: none; color: var(--grey);
+        padding: 12px; font-family: 'Rajdhani', sans-serif;
+        font-size: 12px; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+    }
+    .role-btn.active { background: var(--blue); color: white; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label {
+        display: block; font-size: 10px; font-weight: 700;
+        letter-spacing: 3px; text-transform: uppercase;
+        color: var(--grey); margin-bottom: 8px;
+    }
+    .form-input {
+        width: 100%; background: var(--black); border: 1px solid var(--border);
+        color: var(--white); padding: 12px 16px; border-radius: 4px;
+        font-family: 'Rajdhani', sans-serif; font-size: 15px;
+        outline: none; transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--blue); }
+
+    .btn-submit {
+        width: 100%; background: var(--blue); border: none; color: white;
+        padding: 14px; font-family: 'Rajdhani', sans-serif;
+        font-weight: 700; font-size: 14px; letter-spacing: 3px;
+        text-transform: uppercase; cursor: pointer; border-radius: 4px;
+        transition: background 0.2s; margin-top: 8px;
+    }
+    .btn-submit:hover { background: var(--blue-bright); }
+
+    .auth-footer {
+        text-align: center; margin-top: 24px; font-size: 13px; color: var(--grey);
+    }
+    .auth-footer a { color: var(--blue); text-decoration: none; font-weight: 600; }
+    .auth-footer a:hover { color: var(--blue-bright); }
+
+    .error-box {
+        background: rgba(255,60,60,0.08); border-left: 3px solid #FF4444;
+        padding: 12px 16px; font-size: 13px; color: #FF8888;
+        margin-bottom: 20px; border-radius: 4px;
+    }
+    .success-box {
+        background: rgba(0,180,0,0.08); border-left: 3px solid #00AA00;
+        padding: 12px 16px; font-size: 13px; color: #66DD66;
+        margin-bottom: 20px; border-radius: 4px;
+    }
+
+    @@media (max-width: 600px) {
+        .auth-header, .auth-body { padding: 24px 20px; }
+        .form-row { grid-template-columns: 1fr; }
+    }
+</style>
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="auth-club">KANDY SPORTS CLUB</div>
+            <div class="auth-title">CREATE ACCOUNT</div>
+            <div class="auth-subtitle">Join the club — register as a member or organiser</div>
+        </div>
+        <div class="auth-body">
+
+            <div class="role-toggle">
+                <button type="button" class="role-btn active" id="btn-citizen"
+                        onclick="setRole('citizen')">Citizen</button>
+                <button type="button" class="role-btn" id="btn-organiser"
+                        onclick="setRole('organiser')">Organiser</button>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Error))
+            {
+                <div class="error-box">@Model.Error</div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Success))
+            {
+                <div class="success-box" id="success-box">
+                    @Model.Success
+                </div>
+            }
+
+            <!-- Citizen Form -->
+            <form id="citizen-form" method="post" asp-page-handler="Citizen">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="FullName" class="form-input"
+                               placeholder="John Doe" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="Username" class="form-input"
+                               placeholder="johndoe" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="Email" class="form-input"
+                           placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" name="Phone" class="form-input"
+                           placeholder="+94 77 000 0000" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="Password" class="form-input"
+                           placeholder="••••••••" required />
+                </div>
+                <button type="submit" class="btn-submit">Create Citizen Account</button>
+            </form>
+
+            <!-- Organiser Form -->
+            <form id="organiser-form" method="post" asp-page-handler="Organiser"
+                  style="display:none">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="Name" class="form-input"
+                               placeholder="John Doe" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="Username" class="form-input"
+                               placeholder="johndoe" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Organisation / Club Name</label>
+                    <input type="text" name="Organisation" class="form-input"
+                           placeholder="e.g. Kandy Cricket Club" required />
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="Email" class="form-input"
+                               placeholder="you@example.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="Phone" class="form-input"
+                               placeholder="+94 77 000 0000" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="Password" class="form-input"
+                           placeholder="••••••••" required />
+                </div>
+                <button type="submit" class="btn-submit">Create Organiser Account</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="/Login">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setRole(role) {
+        document.getElementById("btn-citizen").classList.toggle("active",   role === "citizen");
+        document.getElementById("btn-organiser").classList.toggle("active", role === "organiser");
+        document.getElementById("citizen-form").style.display   = role === "citizen"   ? "block" : "none";
+        document.getElementById("organiser-form").style.display = role === "organiser" ? "block" : "none";
+    }
+
+    // auto redirect after success
+    @if (!string.IsNullOrEmpty(Model.Success))
+    {
+        <text>
+        setTimeout(() => { window.location.href = "/Login"; }, 1500);
+        </text>
+    }
+</script>

@@ -1,0 +1,168 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    /* HERO */
+    .hero {
+        min-height: calc(100vh - 70px);
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #0A0A0A 60%, #001a3a 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 4rem 2rem;
+    }
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%; right: -20%;
+        width: 600px; height: 600px;
+        background: radial-gradient(circle, rgba(0,120,255,0.15), transparent 70%);
+        border-radius: 50%;
+    }
+    .hero-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-tag {
+        display: inline-block;
+        background: rgba(0,120,255,0.15);
+        color: var(--blue);
+        border: 1px solid var(--blue);
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        line-height: 1;
+        letter-spacing: 4px;
+        margin-bottom: 1.5rem;
+    }
+    .hero h1 span { color: var(--blue); }
+    .hero p {
+        font-size: 1.2rem;
+        color: var(--grey);
+        max-width: 550px;
+        margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* SPORTS SECTION */
+    .sports-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+    .sport-card {
+        background: var(--black-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        transition: border-color 0.2s, transform 0.2s;
+    }
+    .sport-card:hover {
+        border-color: var(--blue);
+        transform: translateY(-4px);
+    }
+    .sport-card i {
+        font-size: 2.5rem;
+        color: var(--blue);
+        margin-bottom: 1rem;
+    }
+    .sport-card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* EVENTS PREVIEW */
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    .event-card {
+        background: var(--black-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+        transition: border-color 0.2s;
+    }
+    .event-card:hover { border-color: var(--blue); }
+    .event-date {
+        background: var(--blue);
+        color: #fff;
+        border-radius: 6px;
+        padding: 0.5rem 0.8rem;
+        text-align: center;
+        min-width: 56px;
+        font-family: 'Bebas Neue', sans-serif;
+    }
+    .event-date .day { font-size: 1.8rem; line-height: 1; }
+    .event-date .month { font-size: 0.75rem; letter-spacing: 1px; }
+    .event-info h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .event-info p { color: var(--grey); font-size: 0.9rem; }
+
+    /* STATS */
+    .stats-bar {
+        background: var(--blue);
+        padding: 3rem 2rem;
+    }
+    .stats-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+        text-align: center;
+    }
+    .stat-num {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 3rem;
+        line-height: 1;
+    }
+    .stat-label { font-size: 0.9rem; letter-spacing: 1px; opacity: 0.85; }
+</style>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-tag">Est. Kandy, Sri Lanka</div>
+        <h1>KANDY <span>SPORTS</span><br>CLUB</h1>
+        <p>Where champions are made. Join Kandy's premier sports club and elevate your game.</p>
+        <div class="hero-btns">
+            <a asp-page="/Events" class="btn btn-primary">View Events</a>
+            <a asp-page="/About" class="btn btn-outline">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stats-grid">
+        <div><div class="stat-num">500+</div><div class="stat-label">Members</div></div>
+        <div><div class="stat-num">12</div><div class="stat-label">Sports</div></div>
+        <div><div class="stat-num">50+</div><div class="stat-label">Coaches</div></div>
+        <div><div class="stat-num">30+</div><div class="stat-label">Years Active</div></div>
+    </div>
+</div>
+
+<!-- SPORTS -->
+<section class="section" style="background: var(--black-3);">
+    <div class="container">
+        <h2 class="section-title">OUR <span>SPORTS</span></h2>
+        <p class="section-subtitle">World-class facilities across a wide range of disciplines</p>
+        <div class="sports-grid">
+            <div class="sport-card"><i class="fas fa-running"></i><h3>Athletics</h3></div>
+            <div class="sport-card"><i class="fas fa-swimming-pool"></i><h3>Swimming</h3></div>
